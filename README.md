@@ -7,7 +7,7 @@ JEasyPoi Excel和 Word简易工具类
 
 	博客： http://blog.csdn.net/zhangdaiscott
 	论坛： http://www.jeecg.org
-
+    QQ群： 293658367
 	
 ---------------------------
 EasyPoi的主要特点
