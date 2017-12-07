@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.jeecgframework</groupId>
 		<artifactId>jeasypoi</artifactId>
-		<version>2.1.4</version>
+		<version>2.1.4.beta</version>
 	</parent>
 	<artifactId>jeasypoi-web</artifactId>
 	<dependencies>
@@ -27,7 +27,7 @@
 			<artifactId>servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.jeecgframework</groupId>
 			<artifactId>jeasypoi-base</artifactId>
