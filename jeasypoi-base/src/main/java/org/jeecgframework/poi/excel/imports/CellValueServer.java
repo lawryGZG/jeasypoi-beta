@@ -178,26 +178,43 @@ public class CellValueServer {
 	 */
 	private Object getValueByType(String xclass, Object result, ExcelImportEntity entity) {
 		try {
+			if (entity.getUseStr()) { // 是否强制读取字符串
+				return result == null?"":result.toString().trim() + "";
+			}
+			
 			if ("class java.util.Date".equals(xclass)) {
 				return result;
 			}
 			if ("class java.lang.Boolean".equals(xclass) || "boolean".equals(xclass)) {
 				return Boolean.valueOf(String.valueOf(result));
+//				return result;
 			}
 			if ("class java.lang.Double".equals(xclass) || "double".equals(xclass)) {
-				return Double.valueOf(String.valueOf(result));
+				if (result == null || String.valueOf(result.toString()).trim() == "") {
+					return null;
+				}
+				return new Double(String.valueOf(result.toString()).trim().replaceAll(",", ""));
+//				return result == null||result.toString().trim()==""?null:new Double(String.valueOf(result.toString()));
+//				return result;
 			}
 			if ("class java.lang.Long".equals(xclass) || "long".equals(xclass)) {
-				return Long.valueOf(String.valueOf(result));
+				return Long.valueOf(String.valueOf(result).replaceAll(",", ""));
+//				return result;
 			}
 			if ("class java.lang.Float".equals(xclass) || "float".equals(xclass)) {
-				return Float.valueOf(String.valueOf(result));
+				return Float.valueOf(String.valueOf(result).replaceAll(",", ""));
+//				return result;
 			}
 			if ("class java.lang.Integer".equals(xclass) || "int".equals(xclass)) {
-				return Integer.valueOf(String.valueOf(result));
+				return Integer.valueOf(String.valueOf(result).replaceAll(",", ""));
+//				return result;
 			}
 			if ("class java.math.BigDecimal".equals(xclass)) {
-				return new BigDecimal(String.valueOf(result));
+				
+//				return Double.valueOf(String.valueOf(result));
+				return new BigDecimal(String.valueOf(result).replaceAll(",", ""));
+				
+//				return result;
 			}
 			if ("class java.lang.String".equals(xclass)) {
 				// 针对String 类型,但是Excel获取的数据却不是String,比如Double类型,防止科学计数法
@@ -212,6 +229,8 @@ public class CellValueServer {
 			}
 			return result;
 		} catch (Exception e) {
+			System.out.println(entity);
+			System.out.println(result + "->" + xclass);
 			LOGGER.error(e.getMessage(), e);
 			throw new ExcelImportException(ExcelImportEnum.GET_VALUE_ERROR);
 		}

@@ -22,6 +22,7 @@ import java.util.List;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xssf.eventusermodel.XSSFReader;
 import org.apache.poi.xssf.model.SharedStringsTable;
+import org.apache.poi.xssf.model.StylesTable;
 import org.jeecgframework.poi.excel.entity.ImportParams;
 import org.jeecgframework.poi.excel.imports.sax.parse.ISaxRowRead;
 import org.jeecgframework.poi.excel.imports.sax.parse.SaxRowRead;
@@ -64,7 +65,8 @@ public class SaxReadExcel {
 			if (rowRead == null) {
 				rowRead = new SaxRowRead(pojoClass, params, hanlder);
 			}
-			XMLReader parser = fetchSheetParser(sst, rowRead);
+			StylesTable stylesTable = xssfReader.getStylesTable();
+			XMLReader parser = fetchSheetParser(sst, rowRead,stylesTable);
 			Iterator<InputStream> sheets = xssfReader.getSheetsData();
 			int sheetIndex = 0;
 			while (sheets.hasNext() && sheetIndex < params.getSheetNum()) {
@@ -81,9 +83,9 @@ public class SaxReadExcel {
 		}
 	}
 
-	private XMLReader fetchSheetParser(SharedStringsTable sst, ISaxRowRead rowRead) throws SAXException {
+	private XMLReader fetchSheetParser(SharedStringsTable sst, ISaxRowRead rowRead,StylesTable stylesTable) throws SAXException {
 		XMLReader parser = XMLReaderFactory.createXMLReader("org.apache.xerces.parsers.SAXParser");
-		ContentHandler handler = new SheetHandler(sst, rowRead);
+		ContentHandler handler = new SheetHandler(sst, rowRead,stylesTable);
 		parser.setContentHandler(handler);
 		return parser;
 	}

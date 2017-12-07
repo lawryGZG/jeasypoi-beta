@@ -117,6 +117,7 @@ public class SaxRowRead extends ImportBaseService implements ISaxRowRead {
 				addListData(datas);
 			}
 		} catch (Exception e) {
+			System.out.println(datas);
 			LOGGER.error(e.getMessage(), e);
 			throw new ExcelImportException(e.getMessage());
 		}

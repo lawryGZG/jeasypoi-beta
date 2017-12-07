@@ -25,6 +25,11 @@ import java.util.List;
  * @date 2014年6月20日 下午2:26:09
  */
 public class ExcelBaseEntity {
+	
+	/**
+	 * 是否强制读取/设置为字符串 zzwen6
+	 */
+	protected boolean useStr;
 	/**
 	 * 对应name
 	 */
@@ -106,6 +111,14 @@ public class ExcelBaseEntity {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	public boolean getUseStr() {
+		return useStr;
+	}
+
+	public void setUseStr(boolean useStr) {
+		this.useStr = useStr;
 	}
 
 }

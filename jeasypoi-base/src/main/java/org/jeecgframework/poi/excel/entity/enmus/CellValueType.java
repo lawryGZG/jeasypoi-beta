@@ -23,6 +23,7 @@ package org.jeecgframework.poi.excel.entity.enmus;
  */
 public enum CellValueType {
 
-	String, Number, Boolean, Date, TElement, Null, None;
+	BOOL, ERROR, FORMULA, INLINESTR, SSTINDEX, NUMBER, DATE, NULL,TELEMENT,
+	String
 
 }

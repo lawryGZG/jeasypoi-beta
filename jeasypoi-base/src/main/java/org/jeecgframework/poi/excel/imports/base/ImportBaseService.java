@@ -69,6 +69,9 @@ public class ImportBaseService {
 		excelEntity.setDatabaseFormat(excel.databaseFormat());
 		excelEntity.setVerify(getImportVerify(field));
 		excelEntity.setSuffix(excel.suffix());
+		// by zzwen6
+		excelEntity.setUseStr(excel.useStr());
+		
 		getExcelField(targetId, field, excelEntity, excel, pojoClass);
 		if (getMethods != null) {
 			List<Method> newMethods = new ArrayList<Method>();
