@@ -72,6 +72,7 @@ public class JeecgSingleExcelView extends MiniAbstractExcelView {
 			codedFileName = new String(codedFileName.getBytes("UTF-8"), "ISO-8859-1");
 		}
 		response.setHeader("content-disposition", "attachment;filename=" + codedFileName);
+		response.setContentType("application/vnd.ms-excel");
 		ServletOutputStream out = response.getOutputStream();
 		workbook.write(out);
 		out.flush();
